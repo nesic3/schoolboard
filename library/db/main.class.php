@@ -65,7 +65,7 @@
 		public static function load($_arr = array()){
 			#self::ppre($_arr); exit();
 			$_arr = array_merge($_arr, $_REQUEST);
-			$page = $pageo = (isset($_arr['page'])) ? $_arr['page'] : "index";
+			$page = $pageo = (isset($_arr['page'])) ? $_arr['page'] : "students";
 			// Check if page file exists
 			if(!empty($page)){
 				switch($page){

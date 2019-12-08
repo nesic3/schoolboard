@@ -2,9 +2,11 @@
 	if(!defined("haug")){exit("Nothing here...");}
 
 	#main::ppre($_req);
+	/*
 	if(isset($_req['student']) && !isset($_req['module'])){
 		main::toUrl("students?student=$_req[student]&module=view");
 	}
+	*/
 
 	$_students = students::fetch();
 	#main::ppre($_students);
@@ -28,7 +30,7 @@
 		?>
 			<tr>
 				<td><?php echo "$rbr."; ?></td>
-				<td><a href="students?student=<?php echo $p['id']; ?>&module=view"><?php echo "$p[firstname] $p[surname]"; ?></a></td>
+				<td><a href="?student=<?php echo $p['id']; ?>"><?php echo "$p[firstname] $p[surname]"; ?></a></td>
 				<td align="right"><?php echo $p['schoolboard']; ?></td>
 			</tr>
 		<?php

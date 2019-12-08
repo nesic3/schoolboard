@@ -65,9 +65,12 @@
 			return $html;
 		}
 		public static function module($_arr = array()){
-			if(isset(request::get('_request')['module']) && !empty(request::get('_request')['module'])){
-				self::$html->__module = request::get('_request')['module'];
-				$m_file = request::get('_request')['module'];
+			#if(isset(request::get('_request')['module']) && !empty(request::get('_request')['module'])){
+			if(request::get('module')){
+				#self::$html->__module = request::get('_request')['module'];
+				self::$html->__module = request::get('module');
+				#$m_file = request::get('_request')['module'];
+				$m_file = request::get('module');
 				$m = DIR_MODULES."/".main::$main->__class_name."/".$m_file.".php";
 				if(!file_exists($m)){
 					exit("missing module: $m");
@@ -80,10 +83,14 @@
 					return ob_get_clean();
 				}
 			}else{
+				request::set('module', 'index');
+				return self::module(array($_arr));
+				/*
 				$_r = request::get('_request');
 				$_r['module'] = 'index';
 				request::set('_request', $_r);
 				return self::module(array($_arr));
+				*/
 			}
 			return "";
 		}
