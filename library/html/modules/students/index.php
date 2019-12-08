@@ -9,36 +9,32 @@
 	$_students = students::fetch();
 	#main::ppre($_students);
 ?>
-<div class="section values">
-	<div class="container">
-		<div class="row">
-			<div class="twelve columns">
-			<?php if(!$_students){ ?>
-				<p><?php echo 'No students to show.'; ?></p>
-			<?php }else{ ?>
-				<table class="u-full-width">
-					<thead>
-						<tr>
-							<th>Name</th>
-							<th>&nbsp;</th>
-						</tr>
-					</thead>
-					<tbody>
-					<?php
-						foreach($_students as $p){
-					?>
-						<tr>
-							<td><?php echo "$p[firstname] $p[surname]"; ?></td>
-							<td>
-								<a href="students?id=<?php echo $p['id']; ?>&module=view">View</a>
-								<a href="students?id=<?php echo $p['id']; ?>&module=edit">Edit</a>
-							</td>
-						</tr>
-					<?php } ?>
-					</tbody>
-				</table>
-				<?php } ?>
-			</div>
-		</div>
-	</div>
-</div>
+
+<?php if(!$_students){ ?>
+	<p><?php echo 'No students to show.'; ?></p>
+<?php }else{ ?>
+	<table>
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Name</th>
+				<th>School Board</th>
+			</tr>
+		</thead>
+		<tbody>
+		<?php
+			$rbr = 1;
+			foreach($_students as $p){
+		?>
+			<tr>
+				<td><?php echo "$rbr."; ?></td>
+				<td><a href="students?student=<?php echo $p['id']; ?>&module=view"><?php echo "$p[firstname] $p[surname]"; ?></a></td>
+				<td align="right"><?php echo $p['schoolboard']; ?></td>
+			</tr>
+		<?php
+				$rbr++;
+			}
+		?>
+		</tbody>
+	</table>
+	<?php } ?>

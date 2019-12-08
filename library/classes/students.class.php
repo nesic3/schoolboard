@@ -33,7 +33,12 @@
 		}
     public static function fetch($_arr = array()){
       $_tmp = array();
-      $sql = "SELECT * FROM students AS s WHERE 1 < 2";
+      $sql = "SELECT s.* ";
+			$sql .= " , sb.name AS schoolboard ";
+			$sql .= " FROM students AS s ";
+			$sql .= " LEFT JOIN school_boards AS sb ON sb.id = s.school_board_id ";
+			$sql .= " WHERE 1 < 2";
+
 			if(isset($_arr['id']) && $_arr['id']){
 				$sql .= " AND s.id = '$_arr[id]' ";
 			}

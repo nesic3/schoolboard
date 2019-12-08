@@ -12,7 +12,7 @@
 	@ini_set("log_errors", 1);
 	@ini_set("error_log", APPL_DIR."/log/0err0rs.log");
 
-	set_time_limit(60);
+	@set_time_limit(60);
 
 	// Load MAIN Class
 	require_once(DIR_DB."/main.class.php");

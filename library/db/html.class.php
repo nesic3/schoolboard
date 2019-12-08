@@ -77,7 +77,6 @@
 					ob_start();
 					extract(main::get('_params'));
 					include($m);
-					var_dump(ob_get_clean());
 					return ob_get_clean();
 				}
 			}else{
