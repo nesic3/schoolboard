@@ -53,7 +53,9 @@
 			$rez = self::$DB->__db->query($sql) or die(print_r(self::$DB->__db->errorInfo(), true)."\n\n"."<b><pre>$sql<pre></b>");
 			return $rez;
 		}
-
+		public static function _close(){
+			unset(self::$DB->__db);
+		}
 
 		public static function _real_escape_string($str){
 			return addslashes($str);

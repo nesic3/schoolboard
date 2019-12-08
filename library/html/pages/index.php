@@ -1,4 +1,5 @@
 <?php
 	if(!defined("haug")){exit("Nothing here...");}
+
+	main::toUrl('students');
 ?>
-<p>An index page</p>

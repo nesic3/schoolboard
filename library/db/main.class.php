@@ -144,5 +144,34 @@
 				$$c = self::$main->__this = new $c();
 			}
 		}
-
+		public static function obclean($_arr = array()){
+			if(ob_get_contents()!==false){ ob_clean(); }
+			if(ob_get_contents()!==false){ ob_end_clean(); }
+		}
+		public static function toUrl($url = "", $out = false){
+			if($url!=""){
+				$url = "$url";
+			}
+			if(strpos($url, "/")===0){
+				$url = ROOTURL."/$url";
+			}
+			if(!$url){
+				$url = ROOTURL;
+			}
+			self::obclean();
+			header("location:$url");
+			self::_exit(array(
+				'content' => ''
+			));
+		}
+		public static function _exit($_arr = array()){
+			if(isset($_arr['content'])){
+				echo $_arr['content'];
+			}
+			db::_close();
+			if(isset($_arr['return'])){
+				return true;
+			}
+			exit();
+		}
   }

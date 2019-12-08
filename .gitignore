@@ -1,4 +1,5 @@
 test.php
+library/config/thisisdb
 library/config/thisisdb.sq3
 library/config/thisisthedb.sq3-journal
 log/0err0rs.log
