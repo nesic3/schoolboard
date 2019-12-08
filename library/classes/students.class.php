@@ -66,24 +66,30 @@
 			if(!$_grades) die('No grades for selected student.');
 			#main::ppre($_grades);
 
-			$avg = 0;
-			
-			$result = ($avg>=7) ? 'Pass' : 'Fail';
-
-			// Geting results into array
-			$_result = array(
-				'id' => $_student['id'],
-				'name' => "$_student[firstname] $_student[surname]",
-				'grades' => $_grades,
-				'avg' => $avg,
-				'result' => $result
-			);
-			#exit();
+			switch($_student['school_board_id']){
+				case 1:
+					csm::_set(array(
+						'student' => $_student,
+						'grades' => $_grades
+					));
+					csm::calculate();
+				break;
+				case 2:
+					csm::_set(array(
+						'student' => $_student,
+						'grades' => $_grades
+					));
+					csm::calculate();
+				break;
+				default:
+					die('No schoolboard specified for this student.');
+				break;
+			}
+			exit();
 
 			// Depends on the results display information in JSON or XML
 			if($avg>=7){
-				header('Content-Type: application/json; charset=UTF-8', true, 200);
-				echo json_encode($_result, JSON_UNESCAPED_UNICODE, JSON_NUMERIC_CHECK);
+
 			}else{
 
 				$xml = new SimpleXMLElement('<xml/>');
