@@ -47,6 +47,9 @@
 			if(!isset($_arr['id'])){
 				die('No ID specified');
 			}
+			if(!$_arr['id']){
+				die('Invalid ID');
+			}
 			$_tmp = self::fetch($_arr);
 			return ($_tmp) ? $_tmp[0] : $_tmp;
 		}
@@ -75,11 +78,11 @@
 					csm::calculate();
 				break;
 				case 2:
-					csm::_set(array(
+					csmb::_set(array(
 						'student' => $_student,
 						'grades' => $_grades
 					));
-					csm::calculate();
+					csmb::calculate();
 				break;
 				default:
 					die('No schoolboard specified for this student.');
@@ -92,21 +95,7 @@
 
 			}else{
 
-				$xml = new SimpleXMLElement('<xml/>');
-				$students = $xml->addChild('students');
-				$student = $students->addChild('student');
-				$student->addChild('id', $_student['id']);
-				$student->addChild('name', "$_student[firstname] $_student[surname]");
 
-				$grades = $student->addChild('grades');
-				foreach($_grades as $p){
-					$grades->addChild('grade', $p['grade']);
-				}
-				$student->addChild('avg', $avg);
-				$student->addChild('result', $result);
-
-				header('Content-Type: application/xml; charset=utf-8');
-				echo $xml->asXML();
 			}
 		}
   }

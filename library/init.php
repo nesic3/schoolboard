@@ -34,6 +34,10 @@
 	require_once(DIR_CLASSES."/csm.class.php");
 	csm::getInstance();
 
+	// CSM Board
+	require_once(DIR_CLASSES."/csmb.class.php");
+	csmb::getInstance();
+
 	// Load students Class
 	require_once(DIR_CLASSES."/students.class.php");
 	students::getInstance();
