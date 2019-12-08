@@ -2,8 +2,8 @@
 	if(!defined("haug")){exit("Nothing here...");}
 
 	#main::ppre($_req);
-	if(isset($_req['id']) && !isset($_req['module'])){
-		main::toUrl("students?id=$_req[id]&module=view");
+	if(isset($_req['student']) && !isset($_req['module'])){
+		main::toUrl("students?student=$_req[student]&module=view");
 	}
 
 	$_students = students::fetch();

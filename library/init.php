@@ -34,6 +34,10 @@
 	require_once(DIR_CLASSES."/students.class.php");
 	students::getInstance();
 
+	// Load students Class
+	require_once(DIR_CLASSES."/grades.class.php");
+	grades::getInstance();
+
 	// Main initilization
 	main::init();
 

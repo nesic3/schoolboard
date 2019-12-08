@@ -53,22 +53,27 @@
 		public static function view($_arr = array()){
 
 			// Getting student information
-			$_data = self::load(array(
+			$_student = self::load(array(
 		    'id' => $_arr['id']
 		  ));
 			#main::ppre($_data);
-			if(!$_data) die('No student found.');
+			if(!$_student) die('No student found.');
 
 			// Getting student grade information
-			$_grades = array();
+			$_grades = grades::fetch(array(
+				'student_id' => $_arr['id']
+			));
+			if(!$_grades) die('No grades for selected student.');
+			#main::ppre($_grades);
 
-
-			$avg = 10;
+			$avg = 0;
+			
 			$result = ($avg>=7) ? 'Pass' : 'Fail';
+
 			// Geting results into array
 			$_result = array(
-				'id' => $_data['id'],
-				'name' => "$_data[firstname] $_data[surname]",
+				'id' => $_student['id'],
+				'name' => "$_student[firstname] $_student[surname]",
 				'grades' => $_grades,
 				'avg' => $avg,
 				'result' => $result
@@ -80,7 +85,22 @@
 				header('Content-Type: application/json; charset=UTF-8', true, 200);
 				echo json_encode($_result, JSON_UNESCAPED_UNICODE, JSON_NUMERIC_CHECK);
 			}else{
+
+				$xml = new SimpleXMLElement('<xml/>');
+				$students = $xml->addChild('students');
+				$student = $students->addChild('student');
+				$student->addChild('id', $_student['id']);
+				$student->addChild('name', "$_student[firstname] $_student[surname]");
+
+				$grades = $student->addChild('grades');
+				foreach($_grades as $p){
+					$grades->addChild('grade', $p['grade']);
+				}
+				$student->addChild('avg', $avg);
+				$student->addChild('result', $result);
+
 				header('Content-Type: application/xml; charset=utf-8');
+				echo $xml->asXML();
 			}
 		}
   }
